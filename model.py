@@ -44,7 +44,8 @@ class SessionOutput:
         
         # Sort the similarity scores in descending order and return the top k recommendations
         recommendations_list = []
-        recommendations_list = sorted(similarity_scores.items(), key=lambda x: x[1], reverse=True)[:k]
+        sorted_map = sorted(similarity_scores.items(), key=lambda x: x[1], reverse=True)[:k]
+        recommendations_list = [pair[0] for pair in sorted_map]
         return recommendations_list
 
 #call from ui
