@@ -1,4 +1,3 @@
-import csv
 import numpy as np
 from numpy.linalg import norm
 import pandas as pd
@@ -11,11 +10,11 @@ class SessionOutput:
     self.session_length = session_length
     self.session_songIDs = session_songIDs
     
-# Function to calculate the cosine similarity between two songs based on their genre
+# Function to calculate the cosine similarity between two songs
   def calSimilarity(self, vector, other_song_vector):
     return np.dot(vector, other_song_vector)/(norm(vector)*norm(other_song_vector))
 
-# aggregate
+# aggregate vector calculation
   def aggregate_vector(self):
     den = 0
     if self.use_lyrics:
@@ -32,7 +31,6 @@ class SessionOutput:
         songrow = songrow[['tempo', 'energy', 'danceability','loudness','valence','acousticness']]
         agg = agg + songrow.values[0] * (i+1)
         den = den + i+1
-    # print(agg/den)
     return agg/den
 
 # Function to recommend songs based on item-item CF
@@ -45,9 +43,9 @@ class SessionOutput:
             similarity_scores[id] = self.calSimilarity(input_aggregate_vector, other_song_vector)
         
         # Sort the similarity scores in descending order and return the top k recommendations
-        recommendations_1 = []
-        recommendations_1 = sorted(similarity_scores.items(), key=lambda x: x[1], reverse=True)[:k]
-        return recommendations_1
+        recommendations_list = []
+        recommendations_list = sorted(similarity_scores.items(), key=lambda x: x[1], reverse=True)[:k]
+        return recommendations_list
 
 #call from ui
   def recommend_songs(self):
@@ -56,9 +54,8 @@ class SessionOutput:
         return recommendations
 
 # Example usage for testing 
-aggregate_vector = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 data = pd.read_csv('alldata.csv')
-test = SessionOutput(data)
+test = SessionOutput(data, session_length=3, session_songIDs=[1, 2, 3])
 print("Recommended songs:")
 print (test.recommend_songs())
 
