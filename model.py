@@ -39,7 +39,10 @@ class SessionOutput:
         similarity_scores = {}
         for index, row in self.df.iterrows():
             id = row['song_id']
-            other_song_vector = [self.df.iloc[id, 7], self.df.iloc[id, 8], self.df.iloc[id, 9], self.df.iloc[id, 10], self.df.iloc[id, 11], self.df.iloc[id, 12], self.df.iloc[id, 20], self.df.iloc[id, 21], self.df.iloc[id, 22], self.df.iloc[id, 23] ]
+            if self.use_lyrics:
+              other_song_vector = [self.df.iloc[id, 7], self.df.iloc[id, 8], self.df.iloc[id, 9], self.df.iloc[id, 10], self.df.iloc[id, 11], self.df.iloc[id, 12], self.df.iloc[id, 20], self.df.iloc[id, 21], self.df.iloc[id, 22], self.df.iloc[id, 23] ]
+            else:
+               other_song_vector = [self.df.iloc[id, 7], self.df.iloc[id, 8], self.df.iloc[id, 9], self.df.iloc[id, 10], self.df.iloc[id, 11], self.df.iloc[id, 12]]
             similarity_scores[id] = self.calSimilarity(input_aggregate_vector, other_song_vector)
         
         # Sort the similarity scores in descending order and return the top k recommendations
@@ -56,7 +59,7 @@ class SessionOutput:
 
 # Example usage for testing 
 data = pd.read_csv('alldata.csv')
-test = SessionOutput(data, session_length=3, session_songIDs=[1, 2, 3])
+test = SessionOutput(data, True, session_length=3, session_songIDs=[1, 2, 3])
 print("Recommended songs:")
 print (test.recommend_songs())
 
