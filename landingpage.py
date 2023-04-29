@@ -1,10 +1,11 @@
 from flask import Flask, render_template
 import csv
+from webApplication import webApplication
 # from model import SessionOutput
 
 app = Flask(__name__)
 
-
+current_session = []
 
 # load songs from CSV file
 def load_songs(song_ids):
@@ -21,7 +22,6 @@ def load_songs(song_ids):
     else:
         return songs
 
-
 def get_song_recommendations(session_song_ids):
     # Call Session function
     # Take the session_song_ids as the input and return the recommended songs
@@ -31,25 +31,22 @@ def get_song_recommendations(session_song_ids):
 
 @app.route('/')
 def index():
+    return render_template('index.html')
+
+
+@app.route('/session')
+def session_index():
     # load current session
-    current_session = "My current session"
     # load songs from CSV file
+    
+    # songs = webApplication.generatePopularSongs()
     songs = load_songs([])
 
     session_song_ids = ['6','7','8','9','10']
     recommended_songs = get_song_recommendations(session_song_ids)
     # render template with current session and songs
-    return render_template('index.html', current_session=current_session, songs=songs, recommended_songs = recommended_songs)
+    return render_template('session.html', songs=songs, recommended_songs = recommended_songs)
 
-# @app.route('/recommended')
-# def recommended():
-#     # return recommended songs as JSON response
-#     recommended_songs = [
-#         {"title": "Recommended Song 1", "artist": "Artist 1", "url": "#"},
-#         {"title": "Recommended Song 2", "artist": "Artist 2", "url": "#"},
-#         {"title": "Recommended Song 3", "artist": "Artist 3", "url": "#"}
-#     ]
-#     return {"recommended_songs": recommended_songs}
 
 if __name__ == '__main__':
     app.run(debug=True)
