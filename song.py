@@ -13,6 +13,7 @@ class playStatus(Enum):
 
 class Song:
     def __init__(self):
+        self.songid = None
         self.title = None
         self.artist = None 
         self.mood = None 
