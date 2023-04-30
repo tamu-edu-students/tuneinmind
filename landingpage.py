@@ -6,46 +6,15 @@ from webApplication import webApplication
 app = Flask(__name__)
 webApp = webApplication()
 
-current_session = []
-
-# load songs from CSV file
-def load_songs(song_ids):
-    with open('alldata.csv', newline='', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-        songs = [row for row in reader]
-
-    if song_ids:
-        result_songs = []
-        for song in songs: 
-            if song['song_id'] in song_ids: 
-                result_songs.append(song)
-        return result_songs 
-    else:
-        return songs
-
-def get_song_recommendations(session_song_ids):
-    # Call Session function
-    # Take the session_song_ids as the input and return the recommended songs
-    recommended_song_ids = ['1','2','3','4','5', '6','7','8','9','10', '11','12','13','14','15']
-    return load_songs(recommended_song_ids)
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
 @app.route('/session')
 def session_index():
-    # load current session
-    # load songs from CSV file
     songs = webApp.generatePopularSongs()
-    #songs = load_songs([])
-
-    session_song_ids = ['6','7','8','9','10']
-    recommended_songs = get_song_recommendations(session_song_ids)
     # render template with current session and songs
-    return render_template('session.html', songs=songs, recommended_songs = recommended_songs)
+    return render_template('session.html', songs=songs, recommended_songs = [])
 
 @app.route('/add_song_to_session', methods=['POST'])
 def add_song_to_session():
@@ -54,6 +23,20 @@ def add_song_to_session():
     webApp.addToCurrentSession(song_id)
     return jsonify({'success': True})
 
+@app.route('/get_recommended_songs')
+def get_recommended_songs():
+    # Get the current session songs
+    current_session_songs = [int(x) for x in webApp.currentSessionSongs]
+    print("------Current Session Songs------")
+    print(current_session_songs)
+    webApp.currentSessionSongs = current_session_songs
+    # Generate the recommended songs based on the current session songs
+    recommended_songs = webApp.generateRecommendations()
+    print("------Recommended Songs------")
+    print(recommended_songs)
+    # Convert the recommended songs to a JSON response
+    response = [{'title': song.title, 'artist': song.artist, 'song_id': song.song_id} for song in recommended_songs]
+    return jsonify(response)
 
 if __name__ == '__main__':
     app.run(debug=True)
