@@ -56,15 +56,50 @@ class SessionOutput:
         agg_vector = self.aggregate_vector()
         recommendations = self.item_itemcf(agg_vector,5)
         return recommendations
+  
+  def session_mood(self):
+      
+   agg = np.zeros(4)
+   den = 0
+   if self.use_lyrics:  
+      for i in range(self.session_length):
+        songrow = self.df.loc[self.df['song_id'] == self.session_songIDs[i]]
+        songrow_1 = songrow[['spot_happy', 'spot_angry', 'spot_sad','spot_relaxed']]
+        songrow_2 = songrow[['happy', 'angry', 'sad','relaxed']]
+        avg = (songrow_1.values[0] + songrow_2.values[0]) /2
+        agg = agg + avg * (i+1)
+        den = den + i+1
+   else:
+      for i in range(self.session_length):
+        songrow = self.df.loc[self.df['song_id'] == self.session_songIDs[i]]
+        songrow_1 = songrow[['happy', 'angry', 'sad','relaxed']]
+        agg = agg + songrow_1.values[0] * (i+1)
+        den = den + i+1
+   agg_list = (agg/den).tolist()
+   max_index = agg_list.index(max(agg_list))
+   return max_index
+  
+   #find maximum for session mood identification
+   max_index = my_list.index(max(my_list))
 
+  
 # Example usage for testing 
-data = pd.read_csv('alldata.csv')
+data = pd.read_csv('alldata_normalized.csv')
 test = SessionOutput(data, True, session_length=3, session_songIDs=[1, 2, 3])
 print("Recommended songs:")
 print (test.recommend_songs())
+print("Session mood")
+print(test.session_mood())
 
-###use lyrics 6 values vs 10 values cosine similarity
-###mood aggregation
+#check normalization
+
+
+# popular songs calculation
+   
+ 
+   
+
+
 
 
 
