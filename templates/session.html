@@ -114,25 +114,46 @@
 
 
   </style>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-      // add click event listener to songs table rows
-      $('.songs-table tr').click(function() {
-        // get song data from clicked row
-        var title = $(this).find('td:nth-child(1)').text();
-        var artist = $(this).find('td:nth-child(2)').text();
-        // var url = $(this).find('td:nth-child(3) a').attr('href');
-        // add song to current session
-        var currentSessionTable = $('.current-session-table tbody');
-        var item = '<tr><td>' + title + '</td><td>' + artist;
-        currentSessionTable.append(item);
-        // remove song from songs table
-        $(this).remove();
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+      $(document).ready(function() {
+        // add click event listener to songs table rows
+        $('.songs-table tr').click(function() {
+          // get song data from clicked row
+          var title = $(this).find('td:nth-child(1)').text();
+          var artist = $(this).find('td:nth-child(2)').text();
+          var song_id = $(this).find('td:nth-child(3)').text();
+          var self = this; 
+          // var url = $(this).find('td:nth-child(3) a').attr('href');
+          // add song to current session
+          // var currentSessionTable = $('.current-session-table tbody');
+          // var item = '<tr><td>' + title + '</td><td>' + artist;
+          // currentSessionTable.append(item);
+          // // remove song from songs table
+          // $(this).remove();
+          var data = {
+            'title': title,
+            'artist': artist, 
+            'song_id': song_id
+        };
+        $.ajax({
+            type: "POST",
+            url: "/add_song_to_session",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function(response) {
+                if (response.success) {
+                    var currentSessionTable = $('.current-session-table tbody');
+                    var item = '<tr><td>' + title + '</td><td>' + artist;
+                    currentSessionTable.prepend(item);
+                    // remove song from songs table
+                    $(self).remove();
+                }
+            }
+        });
+        });
       });
-    });
-  </script>
+    </script>
 </head>
 <body>
   <div class="row">
@@ -162,13 +183,15 @@
           <tr> 
             <th>Title</th>
             <th>Artist</th>
+            <th style="display:none">Song_id</th>
           </tr>
         </thead>
         <tbody>
           {% for song in songs %}
-          <tr onclick="window.location.href='{{ song.url }}'">
+          <tr>
             <td>{{ song.title }}</td>
             <td>{{ song.artist }}</td>
+            <td style="display:none">{{ song.song_id }}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -188,7 +211,7 @@
             {% for song in recommended_songs %}
             <tr onclick="window.location.href='{{ song.url }}'">
             <td>{{ song.title }}</td>
-            <td>{{ song.artist }}</td>
+            <td>{{ song.a_name }}</td>
             </tr>
             {% endfor %}
         </tbody>

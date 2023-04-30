@@ -19,9 +19,11 @@ class webApplication:
     def __init__(self):
         self.session_id = None
         self.session_status = SessionStatus.ACTIVE
-        self.currentSession = []
+        self.currentSessionSongs = []
         self.popularSongs = []
         self.allSongs = []
+        self.recommendedSongs = []
+        self.loadSongs()
     
     def loadSongs(self):
         '''Reads the alldata.csv songs dataset
@@ -42,14 +44,15 @@ class webApplication:
 
         return self.allSongs
 
-    def selectSongFromPopularSongs(self):
+    def selectSongFromPopularSongs(self, song_id):
         '''Select a song to play from the list of Popular Songs
          This deleted the song from popular songs list
-         Adds that song to the current session
-         
+         Adds that song to the current session         
          Returns:
             current session, Popular Songs, Recommended Songs'''
-        pass
+
+        self.updatePopularSongs(song_id)
+        self.addToCurrentSession(song_id)
 
     def selectSongFromRecommendedSongs(self):
         '''Select a song to play from the list of Recommended Songs
@@ -91,11 +94,15 @@ class webApplication:
 
     def generatePopularSongs(self):
         '''Top 50 song recommendations containing a distribution of Happy, Sad, Relaxed and Angry songs'''
-        pass
+        songs = self.loadSongs()
+        self.popularSongs = [i for i in range(50)]
 
-    def addToCurrentSession(self):
+        return [song for song in self.allSongs if int(song.song_id) in self.popularSongs]
+
+    def addToCurrentSession(self, song_id):
         '''When user selects a new song to play, it needs to be added to the current session'''
-        pass
+        self.currentSessionSongs.append(song_id)
+        
 
     def deleteFromCurrentSession(self):
         '''To delete a song which is displayed in the current session.
@@ -107,9 +114,9 @@ class webApplication:
         This function is called in all such cases'''
         pass
 
-    def updatePopularSongs(self):
+    def updatePopularSongs(self, song_id):
         '''Whenever a song is selected from popular songs listed, that song needs to be deleted and refreshed'''
-        pass
+        self.popularSongs.remove(song_id)
     
     def terminateSession(self):
         '''In case where user chooses to terminate the session, the session related information needs to be cleared'''

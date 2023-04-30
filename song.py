@@ -6,8 +6,8 @@ class playStatus(Enum):
     PLAYED = 3
 
 class Song:
-    def __init__(self, songid, title, artist, mood):
-        self.songid = songid
+    def __init__(self, song_id, title, artist, mood):
+        self.song_id = song_id
         self.title = title
         self.artist = artist 
         self.mood = mood
