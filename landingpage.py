@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify, request
 import csv
 from webApplication import webApplication
 # from model import SessionOutput
@@ -39,13 +39,20 @@ def index():
 def session_index():
     # load current session
     # load songs from CSV file
-    songs = webApp.loadSongs()
+    songs = webApp.generatePopularSongs()
     #songs = load_songs([])
 
     session_song_ids = ['6','7','8','9','10']
     recommended_songs = get_song_recommendations(session_song_ids)
     # render template with current session and songs
     return render_template('session.html', songs=songs, recommended_songs = recommended_songs)
+
+@app.route('/add_song_to_session', methods=['POST'])
+def add_song_to_session():
+    data = request.get_json()
+    song_id = data["song_id"]
+    webApp.addToCurrentSession(song_id)
+    return jsonify({'success': True})
 
 
 if __name__ == '__main__':
