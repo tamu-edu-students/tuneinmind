@@ -62,6 +62,8 @@ class webApplication:
     def selectSongFromRecommendedSongs(self):
         '''Select a song to play from the list of Recommended Songs
         '''
+        self.updatePopularSongs(song_id)
+        self.addToCurrentSession(song_id)
         pass
 
     def deleteSongFromCurrentSession(self):
