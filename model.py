@@ -57,8 +57,7 @@ class SessionOutput:
         recommendations = self.item_itemcf(agg_vector,5)
         return recommendations
   
-  def session_mood(self):
-      
+  def session_mood(self):   
    agg = np.zeros(4)
    den = 0
    if self.use_lyrics:  
@@ -79,8 +78,28 @@ class SessionOutput:
    max_index = agg_list.index(max(agg_list))
    return max_index
   
-   #find maximum for session mood identification
-   max_index = my_list.index(max(my_list))
+ # popular songs calculation- return 51 popular songs [12, 13, 13, 13]
+ #sort top songs based on spotify acoustic values(happy, sad, angry, relaxed)
+  def popularSongs(self):
+
+    filtered_df_happy = self.df[self.df['mood'] == 0]
+    sorted_df_happy = filtered_df_happy.sort_values(by='spot_happy', ascending=False).head(12)
+
+    filtered_df_angry = self.df[self.df['mood'] == 1]
+    sorted_df_angry = filtered_df_angry.sort_values(by='spot_angry', ascending=False).head(13)
+
+    filtered_df_sad = self.df[self.df['mood'] == 2]
+    sorted_df_sad = filtered_df_sad.sort_values(by='spot_sad', ascending=False).head(13)
+
+    filtered_df_relaxed = self.df[self.df['mood'] == 3]
+    sorted_df_relaxed = filtered_df_relaxed.sort_values(by='spot_relaxed', ascending=False).head(13)
+
+    # Shuffle the concatenated dataframe
+    df_concat = pd.concat([sorted_df_happy, sorted_df_angry, sorted_df_sad, sorted_df_relaxed], ignore_index=True)
+    df_shuffled = df_concat.sample(frac=1).reset_index(drop=True)
+
+    shuffled_list = df_shuffled['song_id'].tolist()
+    return shuffled_list
 
   
 # Example usage for testing 
@@ -90,11 +109,11 @@ print("Recommended songs:")
 print (test.recommend_songs())
 print("Session mood")
 print(test.session_mood())
+print("Popular Songs")
+print (test.popularSongs())
 
-#check normalization
 
 
-# popular songs calculation
    
  
    
