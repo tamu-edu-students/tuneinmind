@@ -4,7 +4,7 @@ import pandas as pd
 
 class SessionOutput:
 
-  def __init__(self, df, use_lyrics=True, session_length=3, session_songIDs=[0, 1, 2]):
+  def __init__(self, df = pd.read_csv('alldata_normalized.csv'), use_lyrics=True, session_length=5, session_songIDs=[0, 1, 2]):
     self.df = df
     self.use_lyrics = use_lyrics
     self.session_length = session_length
@@ -20,8 +20,11 @@ class SessionOutput:
     if self.use_lyrics:
       agg = np.zeros(10)
       for i in range(self.session_length):
-        songrow = self.df.loc[self.df['song_id'] == self.session_songIDs[i]]
+        currentSessionSongsLength = len(self.session_songIDs)
+        songrow = self.df.loc[self.df['song_id'] == self.session_songIDs[currentSessionSongsLength - i - 1]]
         songrow = songrow[['tempo', 'energy', 'danceability','loudness','valence','acousticness','happy','angry','sad','relaxed']]
+        print("Song row")
+        print(songrow)
         agg = agg + songrow.values[0] * (i+1)
         den = den + i+1
     else:
@@ -77,40 +80,6 @@ class SessionOutput:
    agg_list = (agg/den).tolist()
    max_index = agg_list.index(max(agg_list))
    return max_index
-  
- # popular songs calculation- return 51 popular songs [12, 13, 13, 13]
- #sort top songs based on spotify acoustic values(happy, sad, angry, relaxed)
-  def popularSongs(self):
-
-    filtered_df_happy = self.df[self.df['mood'] == 0]
-    sorted_df_happy = filtered_df_happy.sort_values(by='spot_happy', ascending=False).head(12)
-
-    filtered_df_angry = self.df[self.df['mood'] == 1]
-    sorted_df_angry = filtered_df_angry.sort_values(by='spot_angry', ascending=False).head(13)
-
-    filtered_df_sad = self.df[self.df['mood'] == 2]
-    sorted_df_sad = filtered_df_sad.sort_values(by='spot_sad', ascending=False).head(13)
-
-    filtered_df_relaxed = self.df[self.df['mood'] == 3]
-    sorted_df_relaxed = filtered_df_relaxed.sort_values(by='spot_relaxed', ascending=False).head(13)
-
-    # Shuffle the concatenated dataframe
-    df_concat = pd.concat([sorted_df_happy, sorted_df_angry, sorted_df_sad, sorted_df_relaxed], ignore_index=True)
-    df_shuffled = df_concat.sample(frac=1).reset_index(drop=True)
-
-    shuffled_list = df_shuffled['song_id'].tolist()
-    return shuffled_list
-
-  
-# Example usage for testing 
-data = pd.read_csv('alldata_normalized.csv')
-test = SessionOutput(data, True, session_length=3, session_songIDs=[1, 2, 3])
-print("Recommended songs:")
-print (test.recommend_songs())
-print("Session mood")
-print(test.session_mood())
-print("Popular Songs")
-print (test.popularSongs())
 
 
 
