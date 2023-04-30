@@ -4,12 +4,13 @@ from webApplication import webApplication
 # from model import SessionOutput
 
 app = Flask(__name__)
+webApp = webApplication()
 
 current_session = []
 
 # load songs from CSV file
 def load_songs(song_ids):
-    with open('alldata.csv', newline='') as csvfile:
+    with open('alldata.csv', newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         songs = [row for row in reader]
 
@@ -38,9 +39,8 @@ def index():
 def session_index():
     # load current session
     # load songs from CSV file
-    
-    # songs = webApplication.generatePopularSongs()
-    songs = load_songs([])
+    songs = webApp.loadSongs()
+    #songs = load_songs([])
 
     session_song_ids = ['6','7','8','9','10']
     recommended_songs = get_song_recommendations(session_song_ids)

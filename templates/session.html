@@ -168,7 +168,7 @@
           {% for song in songs %}
           <tr onclick="window.location.href='{{ song.url }}'">
             <td>{{ song.title }}</td>
-            <td>{{ song.a_name }}</td>
+            <td>{{ song.artist }}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -188,7 +188,7 @@
             {% for song in recommended_songs %}
             <tr onclick="window.location.href='{{ song.url }}'">
             <td>{{ song.title }}</td>
-            <td>{{ song.a_name }}</td>
+            <td>{{ song.artist }}</td>
             </tr>
             {% endfor %}
         </tbody>
