@@ -84,17 +84,18 @@ class SessionOutput:
 
   
 # Example usage for testing 
-data = pd.read_csv('alldata.csv')
+data = pd.read_csv('alldata_normalized.csv')
 test = SessionOutput(data, True, session_length=3, session_songIDs=[1, 2, 3])
 print("Recommended songs:")
 print (test.recommend_songs())
 print("Session mood")
 print(test.session_mood())
 
-
 #check normalization
 
-# popular songs
+
+# popular songs calculation
+   
  
    
 
