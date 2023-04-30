@@ -173,13 +173,15 @@
             <tr> 
             <th>Title</th>
             <th>Artist</th>
+            <th style="display:none">Song_id</th>
             </tr>
         </thead>
         <tbody>
             {% for song in recommended_songs %}
             <tr>
-              <td>{{ song.title }}</td>
-              <td>{{ song.a_name }}</td>
+            <td>{{ song.title }}</td>
+            <td>{{ song.artist }}</td>
+            <td style="display:none">{{ song.song_id }}</td>
             </tr>
             {% endfor %}
         </tbody>

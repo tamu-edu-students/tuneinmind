@@ -26,6 +26,7 @@ def add_song_to_session():
 @app.route('/get_recommended_songs')
 def get_recommended_songs():
     # Get the current session songs
+    print(webApp.currentSessionSongs)
     current_session_songs = [int(x) for x in webApp.currentSessionSongs]
     print("------Current Session Songs------")
     print(current_session_songs)
