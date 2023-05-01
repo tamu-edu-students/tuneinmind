@@ -47,5 +47,13 @@ def toggle():
     elif toggle_value == "true": webApp.lyricsToggle = True
     return jsonify({'status': 'OK'})
 
+@app.route('/current_song')
+def get_current_song():
+    # Get the current session songs
+    current_song = webApp.currentlyPlayedSong
+    # Convert the recommended songs to a JSON response
+    response = {'title': current_song.title, 'artist': current_song.artist, 'song_id': current_song.song_id}
+    return jsonify(response)
+
 if __name__ == '__main__':
     app.run(debug=True)
