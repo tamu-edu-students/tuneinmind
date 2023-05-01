@@ -13,6 +13,9 @@ def index():
 
 @app.route('/session')
 def session_index():
+    webApp.reset()
+    # print("------Current Songs-------")
+    # print(webApp.currentSessionSongs)
     songs = webApp.generatePopularSongs()
     # render template with current session and songs
     return render_template('session.html', songs=songs, recommended_songs = [])
