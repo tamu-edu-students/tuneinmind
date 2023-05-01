@@ -55,5 +55,18 @@ def get_current_song():
     response = {'title': current_song.title, 'artist': current_song.artist, 'song_id': current_song.song_id}
     return jsonify(response)
 
+@app.route('/current_session_mood')
+def get_current_session_mood():
+    # Get the current session mood
+    current_session_songs = [int(x) for x in webApp.currentSessionSongs]
+    # print("------Current Session Songs------")
+    # print(current_session_songs)
+    webApp.currentSessionSongs = current_session_songs
+    current_session_mood = webApp.getCurrentSessionMood()
+    # Convert the recommended songs to a JSON response
+    response = {'mood': current_session_mood}
+    print("sessionmood:",current_session_mood)
+    return jsonify(response)
+
 if __name__ == '__main__':
     app.run(debug=True)

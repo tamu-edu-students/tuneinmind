@@ -159,3 +159,17 @@ class webApplication:
     def terminateSession(self):
         '''In case where user chooses to terminate the session, the session related information needs to be cleared'''
         pass
+
+    def getCurrentSessionMood(self):
+        sessionOutput = SessionOutput(use_lyrics= self.lyricsToggle, session_length=3, session_songIDs= self.currentSessionSongs)
+        mood = sessionOutput.session_mood()
+        if mood == 0:
+            return 'Happy'
+        elif mood ==1:
+            return 'Angry'
+        elif mood == 2:
+            return 'Sad'
+        elif mood == 3:
+            return 'Relaxed'
+        else:
+            return 'Current Mood'

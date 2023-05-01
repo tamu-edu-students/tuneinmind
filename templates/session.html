@@ -36,6 +36,19 @@
       width: 30%;
     }
 
+    .toggle-parent {
+      display: inline-block;
+      width: 25%;
+      text-align: center;
+    }
+
+    .mood {
+      display:inline-block; 
+      width:50%;
+      text-align: center;
+      /* padding-left: 50px; */
+    }
+
     .toggle-wrapper {
       display: inline-block;
       position: relative;
@@ -201,10 +214,19 @@
 <body>
   
   <div class= "top-options">
-    <h3>Want to use Lyrics?</h3>
-    <div class="toggle-wrapper">
-      <input type="checkbox" id="toggle" name="toggle" checked>
-      <label for="toggle"></label>
+    
+    
+    <div class = "toggle-parent">
+      <h3>Want to use Lyrics?</h3>
+      <div class="toggle-wrapper">
+        <input type="checkbox" id="toggle" name="toggle" checked>
+        <label for="toggle"></label>
+      </div>
+    </div>
+    
+    <div class="mood">
+      <h3>Your Current Mood</h3>
+      <div id = "current-mood" style="font-size: 30px;">Def mood</div>
     </div>
   </div>
   
@@ -278,7 +300,9 @@
     <span> ----By----</span>
     <span id="artist-name">Song Artist</span>
     <button class = "image-button"></button>
+    
   </div>
 
+  
 </body>
 </html>

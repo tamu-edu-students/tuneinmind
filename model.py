@@ -65,11 +65,17 @@ class SessionOutput:
   def session_mood(self):   
    agg = np.zeros(4)
    den = 0
-   if self.use_lyrics:  
+   if self.use_lyrics:           
       for i in range(self.session_length):
-        songrow = self.df.loc[self.df['song_id'] == self.session_songIDs[i]]
+        print("------- Current Song IDs --------")
+        # print(self.session_songIDs)
+        currentSessionSongsLength = len(self.session_songIDs)
+        songrow = self.df.loc[self.df['song_id'] == self.session_songIDs[currentSessionSongsLength - i - 1]]
+        # print(songrow)
         songrow_1 = songrow[['spot_happy', 'spot_angry', 'spot_sad','spot_relaxed']]
+        # print(songrow_1)
         songrow_2 = songrow[['happy', 'angry', 'sad','relaxed']]
+        # print(songrow_2)
         avg = (songrow_1.values[0] + songrow_2.values[0]) /2
         agg = agg + avg * (i+1)
         den = den + i+1
@@ -82,6 +88,11 @@ class SessionOutput:
    agg_list = (agg/den).tolist()
    max_index = agg_list.index(max(agg_list))
    return max_index
+  
+# data = pd.read_csv('alldata.csv')
+# test = SessionOutput(data, True, session_length=3, session_songIDs=[1771])
+# print("Session mood:", test.session_mood())
+# print(test.session_mood())
 
 
 
