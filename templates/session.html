@@ -52,8 +52,9 @@
         top: 0;
         height: 50%;
         width: 40%;
-        overflow-y: scroll;
         margin-left: 10px;
+        overflow: auto;
+        overflow-block: auto;
     }
 
     .fixed-div-bottom-left {
@@ -114,6 +115,12 @@
 
 
   </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="../static/fresh-bootstrap-table.css" rel="stylesheet" />
+    <link href="../static/demo.css" rel="stylesheet" />
+  
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>  
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- <script type="module" type="module">
@@ -127,17 +134,20 @@
   <div class="row">
     <div class="fixed-div-top-left">
         <h2>Current Session</h2>
-        <table class="current-session-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Artist</th>
-            </tr>
-          </thead>
-          <tbody>
-           
-          </tbody>
-        </table>
+        <div class="fresh-table full-color-orange">
+          <!-- <table class="current-session-table"> -->
+            <table id="fresh-table" class="current-session-table" >
+            <thead>
+              <tr>
+                <th data-field="name">Title</th>
+                <th data-field="country">Artist</th>
+              </tr>
+            </thead>
+            <tbody>
+             
+            </tbody>
+          </table>
+        </div>
       </div>
     <div class="scrollable-div-right">
       <h2>Popular Songs</h2>
@@ -146,6 +156,8 @@
         <li><a>{{ song.f_name }} - {{ song.a_name }}</a></li>
         {% endfor %}
       </ul> -->
+      
+      <div class="fresh-table full-color-azure">
       <table class = "songs-table">
         <thead>
           <tr> 
@@ -164,10 +176,12 @@
           {% endfor %}
         </tbody>
       </table>
+      </div>
     </div>
   </div>
   <div class="fixed-div-bottom-left">
     <h2>Recommended Songs</h2>
+    <div class="fresh-table full-color-red">
     <table class = "recommended-songs-table">
         <thead>
             <tr> 
@@ -186,6 +200,7 @@
             {% endfor %}
         </tbody>
     </table>
+    </div>
   </div>
 </body>
 </html>
