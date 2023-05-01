@@ -8,6 +8,7 @@ webApp = webApplication()
 
 @app.route('/')
 def index():
+    webApp.reset()
     return render_template('index.html')
 
 @app.route('/session')

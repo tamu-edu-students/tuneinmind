@@ -32,6 +32,19 @@ class webApplication:
         self.sessionThreshold = 5
         self.lyricsToggle = True
         self.loadSongs()
+
+    def reset(self):
+        self.session_id = None
+        self.session_status = SessionStatus.ACTIVE
+        self.currentSessionSongs = []
+        self.popularSongs = []
+        self.allSongs = []
+        self.recommendedSongs = []
+        self.currentlyPlaying = None
+        self.currentlyPlayedSong = []
+        self.sessionThreshold = 5
+        self.lyricsToggle = True
+        self.loadSongs()
     
     def loadSongs(self):
         '''Reads the alldata.csv songs dataset
@@ -131,7 +144,7 @@ class webApplication:
         self.currentSessionSongs.append(song_id)
         self.currentlyPlaying = self.currentSessionSongs[len(self.currentSessionSongs)-1]
         self.currentlyPlayedSong = [song for song in self.allSongs if int(song.song_id) == int(self.currentlyPlaying)][0]
-
+        print('See Here for current session songs', self.currentSessionSongs)
         # if len(self.currentSessionSongs) > self.sessionThreshold:
         #     self.generateRecommendations()
         

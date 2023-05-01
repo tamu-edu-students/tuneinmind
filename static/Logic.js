@@ -111,5 +111,11 @@ $(document).ready(function() {
         addSongToSession.call(this);
     });
 
+    $(document).on('click', '.end-session', function() {
+      window.location.href = "/";
+  });
+
+
+
   });
   
