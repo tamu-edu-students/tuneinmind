@@ -5,6 +5,14 @@
   <title>My Music App</title>
   <style>
     /* CSS styles for the layout */
+
+    body {
+      background-image: url("../static/assets/img/landingpage_background.jpg");
+      background-size: cover;
+      color: white;
+    }   
+
+
     .row {
       display: flex;
       flex-wrap: nowrap;
@@ -50,9 +58,11 @@
     }
 
     .end-session {
+      border-radius: 50%;
       display:inline-block; 
       width:15%;
       text-align: center;
+      border-radius: 10px;
     }
 
     .toggle-wrapper {
@@ -113,15 +123,25 @@
       width: 100%;
     }
 
-    .songs-table th, .songs-table td {
+    .songs-table th {
+      background-color: gray;
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #ddd;
+      color: black;
+    }
+
+    .songs-table td {
+
       text-align: left;
       padding: 8px;
       border: 1px solid #ddd;
     }
 
     .songs-table tr:hover {
-      background-color: #f5f5f5;
+      background-color: orange;
       cursor: pointer;
+      color: black;
     }
 
     .scrollable-div-right {
@@ -157,15 +177,24 @@
       width: 100%;
     }
 
-    .current-session-table th, .current-session-table td {
+    .current-session-table th {
+      background-color: gray;
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #ddd;
+      color: black;
+    }
+
+    .current-session-table td {
       text-align: left;
       padding: 8px;
       border: 1px solid #ddd;
     }
 
     .current-session-table tr:hover {
-      background-color: #f5f5f5;
+      background-color: orange;
       cursor: pointer;
+      color: black;
     }
 
     .recommended-songs-table {
@@ -173,15 +202,24 @@
       width: 100%;
     }
 
-    .recommended-songs-table th, .recommended-songs-table td {
+    .recommended-songs-table th{
+      background-color: gray;
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #ddd;
+      color: black;
+    }
+
+    .recommended-songs-table td {
       text-align: left;
       padding: 8px;
       border: 1px solid #ddd;
     }
 
     .recommended-songs-table tr:hover {
-      background-color: #f5f5f5;
+      background-color: orange;
       cursor: pointer;
+      color: black;
     }
 
     .current-session {
@@ -197,10 +235,11 @@
       text-align: center;
       font-size: 30px;
       margin: 10px;
-      border: 1px solid #000; /* border style */
+      border: 1px solid white; /* border style */
       padding: 10px; /* spacing between border and content */
        /* spacing between box and other elements */
       box-shadow: 2px 2px 5px #888; /* shadow effect */
+      /* background-color: green; */
     }
 
     .image-button {
