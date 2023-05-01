@@ -24,6 +24,8 @@ $(document).ready(function() {
             // remove song from songs table
             $(self).remove();
             
+            
+
             //Add currently playing song
             $.ajax({
               url: '/current_song',
@@ -58,6 +60,16 @@ $(document).ready(function() {
                     //   });
                     recommendedSongsTable.append(row);
                   }
+                }
+              });
+
+              // get current mood
+              $.ajax({
+                url: '/current_session_mood',
+                type: 'GET',
+                success: function(response) {
+                  console.log(response)
+                    $('#current-mood').text(response.mood);
                 }
               });
             }
