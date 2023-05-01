@@ -7,7 +7,7 @@
     /* CSS styles for the layout */
 
     body {
-      background-image: url("../static/assets/img/landingpage_background.jpg");
+      background-image: url("../static/assets/img/plain_bg.jpg");
       background-size: cover;
       color: white;
     }   
@@ -228,11 +228,12 @@
 
     .music-player {
       position: absolute;
+      background-color: #569DAA;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 40px;
       text-align: center;
+      height: 40px;
       font-size: 30px;
       margin: 10px;
       border: 1px solid white; /* border style */
@@ -240,6 +241,15 @@
        /* spacing between box and other elements */
       box-shadow: 2px 2px 5px #888; /* shadow effect */
       /* background-color: green; */
+    }
+
+    .your-mood {
+      font-size: 40px;
+      font-weight: 600;
+      background-image: linear-gradient(to left, #ffffff, #ffffff);
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
     }
 
     .image-button {
@@ -251,6 +261,19 @@
       background-size: cover;
     }
 
+    .end-session-btn {
+      background-color: #b8721d;
+      border: none;
+      color: black;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .end-session-btn:hover {
+      background-color: #8f5004;
+    }
 
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>  
@@ -272,12 +295,12 @@
     
     <div class="mood">
       <h3>Your Current Mood</h3>
-      <div id = "current-mood" style="font-size: 30px;">Def mood</div>
+      <div id = "current-mood" class= "your-mood">Your mood</div>
     </div>
 
     <div class="end-session">
       <h3>Want to end your session?</h3>
-      <button style="font-size: 15px;">End Session</button>
+      <button style="font-size: 15px;" class = "end-session-btn">End Session</button>
     </div>
   </div>
   
@@ -352,12 +375,11 @@
   </div>
 
   <div class ='music-player'>
-    <span style = "width : 15%">Currently Playing---</span>
-    <span id="current-song" style = "width : 15%">Song Title</span> 
-    <span> ----By----</span>
-    <span id="artist-name" style = "width : 15%; margin-right: 20px;" >Song Artist</span>
+    <span style = "width : 15%;">Currently Playing: </span>
+    <span id="current-song" style = "width : 15%; font-size: 40px;">Song Title</span> 
+    <span style="font-size: 20px;"> by </span>
+    <span id="artist-name" style = "width : 15%; margin-right: 20px; font-size: 20px;" >Song Artist</span>
     <button class = "image-button"></button>
-    
   </div>
 
   
