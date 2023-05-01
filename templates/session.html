@@ -251,6 +251,7 @@
             <tr>
               <th>Title</th>
               <th>Artist</th>
+              <th>Mood</th>
             </tr>
           </thead>
           <tbody>
@@ -266,6 +267,7 @@
                 <th>Title</th>
                 <th>Artist</th>
                 <th style="display:none">Song_id</th>
+                <th>Mood</th>
                 </tr>
             </thead>
             <tbody>
@@ -274,6 +276,7 @@
                 <td>{{ song.title }}</td>
                 <td>{{ song.artist }}</td>
                 <td style="display:none">{{ song.song_id }}</td>
+                <td>{{ song.mood }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -290,6 +293,7 @@
               <th>Title</th>
               <th>Artist</th>
               <th style="display:none">Song_id</th>
+              <th>Mood</th>
             </tr>
           </thead>
           <tbody>
@@ -298,6 +302,7 @@
               <td>{{ song.title }}</td>
               <td>{{ song.artist }}</td>
               <td style="display:none">{{ song.song_id }}</td>
+              <td>{{ song.mood }}</td>
             </tr>
             {% endfor %}
           </tbody>
