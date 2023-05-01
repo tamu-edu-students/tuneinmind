@@ -1,6 +1,7 @@
 $(document).ready(function() {
     function addSongToSession() {
       // get song data from clicked row
+      console.log('addSongToSession called');
       var title = $(this).find('td:nth-child(1)').text();
       var artist = $(this).find('td:nth-child(2)').text();
       var song_id = $(this).find('td:nth-child(3)').text();
@@ -18,12 +19,14 @@ $(document).ready(function() {
         success: function(response) {
           if (response.success) {
             var currentSessionTable = $('.current-session-table tbody');
-            var item = '<tr><td>' + title + '</td><td>' + artist;
+            var item = '<tr><td>' + title + '</td><td>' + artist + '</td><td style="display:none">' + song_id;
             currentSessionTable.prepend(item);
             // remove song from songs table
             $(self).remove();
-  
+            
+            
             if (currentSessionTable.children().length >= 5) {
+              console.log("More children, stop !")
               // Show the recommended songs table
               // $('.recommended-songs-table').show();
               // Make an AJAX request to fetch recommended songs
@@ -36,7 +39,13 @@ $(document).ready(function() {
                   recommendedSongsTable.empty(); // Clear the table body
                   for (var i = 0; i < response.length; i++) {
                     var song = response[i];
-                    var row = '<tr><td>' + song.title + '</td><td>' + song.artist + '</td></tr>';
+                    var row = '<tr><td>' + song.title + '</td><td>' + song.artist + '</td><td style="display:none">' + song.song_id;
+                    console.log("Songs recommended successfully !")
+                    // $('.recommended-songs-table tr').click(function() {
+                    //     console.log("Clicked on reco song")  
+                    //     console.log("song name : ", song.title)
+                    //     addSongToSession.call(this);
+                    //   });
                     recommendedSongsTable.append(row);
                   }
                 }
@@ -53,8 +62,15 @@ $(document).ready(function() {
     });
   
     // add click event listener to another table component
-    $('.recommended-songs-table tr').click(function() {
-      addSongToSession.call(this);
+    // $('.recommended-songs-table tr').click(function() {
+    //   console.log("Clicked on reco song")  
+    //   addSongToSession.call(this);
+    // });
+
+    // add click event listener to parent of recommended table
+    $(document).on('click', '.recommended-songs-table tr', function() {
+        addSongToSession.call(this);
     });
+
   });
   
