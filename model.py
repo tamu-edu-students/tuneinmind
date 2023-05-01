@@ -53,9 +53,9 @@ class SessionOutput:
         
         # Sort the similarity scores in descending order and return the top k recommendations
         recommendations_list = []
-        sorted_map = sorted(similarity_scores.items(), key=lambda x: x[1], reverse=True)[:k]
-        recommendations_list = [pair[0] for pair in sorted_map]
-        return recommendations_list
+        sorted_map = sorted(similarity_scores.items(), key=lambda x: x[1], reverse=True)
+        recommendations_list = [pair[0] for pair in sorted_map if pair[0] not in self.session_songIDs]
+        return list(set(recommendations_list))[:k]
 
 #call from ui
   def recommend_songs(self):
@@ -77,7 +77,7 @@ class SessionOutput:
         # print(songrow_1)
         songrow_2 = songrow[['happy', 'angry', 'sad','relaxed']]
         # print(songrow_2)
-        avg = (songrow_1.values[0] + songrow_2.values[0]) /2
+        avg = (songrow_1.values[0] + songrow_2.values[0])/2
         agg = agg + avg * (i+1)
         den = den + i+1
    else:
