@@ -144,7 +144,7 @@ class webApplication:
         self.currentSessionSongs.append(song_id)
         self.currentlyPlaying = self.currentSessionSongs[len(self.currentSessionSongs)-1]
         self.currentlyPlayedSong = [song for song in self.allSongs if int(song.song_id) == int(self.currentlyPlaying)][0]
-        print('See Here for current session songs', self.currentSessionSongs)
+        # print('See Here for current session songs', self.currentSessionSongs)
         # if len(self.currentSessionSongs) > self.sessionThreshold:
         #     self.generateRecommendations()
         

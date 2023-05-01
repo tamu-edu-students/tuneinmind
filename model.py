@@ -18,9 +18,10 @@ class SessionOutput:
   def aggregate_vector(self):
     den = 0
     if self.use_lyrics:
-      print("Yippee !! Lyrics are used to recommend songs")
+      # print("Yippee !! Lyrics are used to recommend songs")
       agg = np.zeros(10)
-      for i in range(self.session_length):
+      iter_length = min(self.session_length, len(self.session_songIDs))
+      for i in range(iter_length):
         currentSessionSongsLength = len(self.session_songIDs)
         songrow = self.df.loc[self.df['song_id'] == self.session_songIDs[currentSessionSongsLength - i - 1]]
         songrow = songrow[['tempo', 'energy', 'danceability','loudness','valence','acousticness','happy','angry','sad','relaxed']]
@@ -29,7 +30,7 @@ class SessionOutput:
         agg = agg + songrow.values[0] * (i+1)
         den = den + i+1
     else:
-      print("Oops !! Lyrics are not used.")
+      # print("Oops !! Lyrics are not used.")
       agg = np.zeros(6)
       for i in range(self.session_length):
         songrow = self.df.loc[self.df['song_id'] == self.session_songIDs[i]]

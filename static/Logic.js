@@ -5,11 +5,13 @@ $(document).ready(function() {
       var title = $(this).find('td:nth-child(1)').text();
       var artist = $(this).find('td:nth-child(2)').text();
       var song_id = $(this).find('td:nth-child(3)').text();
+      var mood = $(this).find('td:nth-child(4)').text();
       var self = this;
       var data = {
         'title': title,
         'artist': artist,
-        'song_id': song_id
+        'song_id': song_id, 
+        'mood': mood
       };
       $.ajax({
         type: "POST",
@@ -19,7 +21,7 @@ $(document).ready(function() {
         success: function(response) {
           if (response.success) {
             var currentSessionTable = $('.current-session-table tbody');
-            var item = '<tr><td>' + title + '</td><td>' + artist + '</td><td style="display:none">' + song_id;
+            var item = '<tr><td>' + title + '</td><td>' + artist + '</td><td style="display:none">' + song_id + '</td><td>' + mood;
             currentSessionTable.prepend(item);
             // remove song from songs table
             $(self).remove();
@@ -34,6 +36,7 @@ $(document).ready(function() {
                 console.log(response)
                   $('#current-song').text(response.title);
                   $('#artist-name').text(response.artist);
+                  $('#song-mood').text(response.mood)
               }
             });
             
@@ -51,7 +54,7 @@ $(document).ready(function() {
                   recommendedSongsTable.empty(); // Clear the table body
                   for (var i = 0; i < response.length; i++) {
                     var song = response[i];
-                    var row = '<tr><td>' + song.title + '</td><td>' + song.artist + '</td><td style="display:none">' + song.song_id;
+                    var row = '<tr><td>' + song.title + '</td><td>' + song.artist + '</td><td style="display:none">' + song.song_id + '</td><td>' + song.mood;
                     console.log("Songs recommended successfully !")
                     // $('.recommended-songs-table tr').click(function() {
                     //     console.log("Clicked on reco song")  

@@ -27,7 +27,7 @@ def add_song_to_session():
 @app.route('/get_recommended_songs')
 def get_recommended_songs():
     # Get the current session songs
-    print(webApp.currentSessionSongs)
+    # print(webApp.currentSessionSongs)
     current_session_songs = [int(x) for x in webApp.currentSessionSongs]
     # print("------Current Session Songs------")
     # print(current_session_songs)
@@ -37,13 +37,13 @@ def get_recommended_songs():
     # print("------Recommended Songs------")
     # print(recommended_songs)
     # Convert the recommended songs to a JSON response
-    response = [{'title': song.title, 'artist': song.artist, 'song_id': song.song_id} for song in recommended_songs]
+    response = [{'title': song.title, 'artist': song.artist, 'song_id': song.song_id, 'mood': song.mood} for song in recommended_songs]
     return jsonify(response)
 
 @app.route('/toggle', methods=['POST'])
 def toggle():
     toggle_value = request.form['toggle']
-    print('Toggle value:', toggle_value)
+    # print('Toggle value:', toggle_value)
     if toggle_value == "false": webApp.lyricsToggle = False
     elif toggle_value == "true": webApp.lyricsToggle = True
     return jsonify({'status': 'OK'})
@@ -53,7 +53,7 @@ def get_current_song():
     # Get the current session songs
     current_song = webApp.currentlyPlayedSong
     # Convert the recommended songs to a JSON response
-    response = {'title': current_song.title, 'artist': current_song.artist, 'song_id': current_song.song_id}
+    response = {'title': current_song.title, 'artist': current_song.artist, 'song_id': current_song.song_id, 'mood': current_song.mood}
     return jsonify(response)
 
 @app.route('/current_session_mood')
@@ -66,7 +66,7 @@ def get_current_session_mood():
     current_session_mood = webApp.getCurrentSessionMood()
     # Convert the recommended songs to a JSON response
     response = {'mood': current_session_mood}
-    print("sessionmood:",current_session_mood)
+    # print("sessionmood:",current_session_mood)
     return jsonify(response)
 
 if __name__ == '__main__':
