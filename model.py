@@ -53,9 +53,9 @@ class SessionOutput:
         
         # Sort the similarity scores in descending order and return the top k recommendations
         recommendations_list = []
-        sorted_map = sorted(similarity_scores.items(), key=lambda x: x[1], reverse=True)
-        recommendations_list = [pair[0] for pair in sorted_map if pair[0] not in self.session_songIDs]
-        return list(set(recommendations_list))[:k]
+        sorted_map = sorted(similarity_scores.items(), key=lambda x: x[1], reverse=True)[:k]
+        recommendations_list = [pair[0] for pair in sorted_map]
+        return recommendations_list
 
 #call from ui
   def recommend_songs(self):
