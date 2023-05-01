@@ -68,7 +68,7 @@ class SessionOutput:
    den = 0
    if self.use_lyrics:           
       for i in range(self.session_length):
-        print("------- Current Song IDs --------")
+        # print("------- Current Song IDs --------")
         # print(self.session_songIDs)
         currentSessionSongsLength = len(self.session_songIDs)
         songrow = self.df.loc[self.df['song_id'] == self.session_songIDs[currentSessionSongsLength - i - 1]]

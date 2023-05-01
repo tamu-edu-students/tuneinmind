@@ -158,8 +158,8 @@ class webApplication:
         '''Whenever there is an update to the current session, recommendations need to be refreshed
         This function is called in all such cases'''
 
-        print("calling recommendations function")
-        print("Now the lyrics toggle is ", self.lyricsToggle)
+        # print("calling recommendations function")
+        # print("Now the lyrics toggle is ", self.lyricsToggle)
         sessionOutput = SessionOutput(use_lyrics= self.lyricsToggle, session_length=3, session_songIDs= self.currentSessionSongs)
         self.recommendedSongs = sessionOutput.recommend_songs()
 

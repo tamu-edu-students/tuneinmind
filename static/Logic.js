@@ -117,8 +117,5 @@ $(document).ready(function() {
     $(document).on('click', '.end-session', function() {
       window.location.href = "/";
   });
-
-
-
   });
   
