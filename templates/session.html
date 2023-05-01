@@ -49,6 +49,12 @@
       /* padding-left: 50px; */
     }
 
+    .end-session {
+      display:inline-block; 
+      width:15%;
+      text-align: center;
+    }
+
     .toggle-wrapper {
       display: inline-block;
       position: relative;
@@ -200,6 +206,7 @@
     .image-button {
       width: 50px;
       height: 40px;
+      padding-left: 30px;
       background-image: url("../static/assets/img/play.jpg");
       background-repeat: no-repeat;
       background-size: cover;
@@ -227,6 +234,11 @@
     <div class="mood">
       <h3>Your Current Mood</h3>
       <div id = "current-mood" style="font-size: 30px;">Def mood</div>
+    </div>
+
+    <div class="end-session">
+      <h3>Want to end your session?</h3>
+      <button style="font-size: 15px;">End Session</button>
     </div>
   </div>
   
@@ -296,9 +308,10 @@
   </div>
 
   <div class ='music-player'>
-    <span id="current-song">Song Title</span>
+    <span style = "width : 15%">Currently Playing---</span>
+    <span id="current-song" style = "width : 15%">Song Title</span> 
     <span> ----By----</span>
-    <span id="artist-name">Song Artist</span>
+    <span id="artist-name" style = "width : 15%; margin-right: 20px;" >Song Artist</span>
     <button class = "image-button"></button>
     
   </div>
