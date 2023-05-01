@@ -24,6 +24,16 @@ $(document).ready(function() {
             // remove song from songs table
             $(self).remove();
             
+            //Add currently playing song
+            $.ajax({
+              url: '/current_song',
+              type: 'GET',
+              success: function(response) {
+                console.log(response)
+                  $('#current-song').text(response.title);
+                  $('#artist-name').text(response.artist);
+              }
+            });
             
             if (currentSessionTable.children().length >= 5) {
               console.log("More children, stop !")
@@ -55,6 +65,23 @@ $(document).ready(function() {
         }
       });
     }
+
+    const toggle = $('#toggle');
+    
+    toggle.change(function() {
+        const toggleValue = toggle.prop('checked');
+        $.ajax({
+            type: 'POST',
+            url: '/toggle',
+            data: { toggle: toggleValue },
+            success: function(response) {
+                console.log('Toggle value submitted successfully');
+            },
+            error: function(err) {
+                console.log('Error submitting toggle value:', err);
+            }
+        });
+    });
   
     // add click event listener to songs table rows
     $('.songs-table tr').click(function() {

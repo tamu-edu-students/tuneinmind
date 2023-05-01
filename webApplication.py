@@ -27,7 +27,10 @@ class webApplication:
         self.popularSongs = []
         self.allSongs = []
         self.recommendedSongs = []
+        self.currentlyPlaying = None
+        self.currentlyPlayedSong = []
         self.sessionThreshold = 5
+        self.lyricsToggle = True
         self.loadSongs()
     
     def loadSongs(self):
@@ -56,15 +59,14 @@ class webApplication:
          Returns:
             current session, Popular Songs, Recommended Songs'''
 
-        self.updatePopularSongs(song_id)
-        self.addToCurrentSession(song_id)
+        # self.updatePopularSongs(song_id)
+        # self.addToCurrentSession(song_id)
 
-    def selectSongFromRecommendedSongs(self):
+    def selectSongFromRecommendedSongs(self, song_id):
         '''Select a song to play from the list of Recommended Songs
         '''
-        self.updatePopularSongs(song_id)
-        self.addToCurrentSession(song_id)
-        pass
+        # self.updatePopularSongs(song_id)
+        # self.addToCurrentSession(song_id)
 
     def deleteSongFromCurrentSession(self):
         '''Deleting a song from current session, 
@@ -103,8 +105,6 @@ class webApplication:
     # sort top songs based on spotify acoustic values(happy, sad, angry, relaxed)
     def generatePopularSongs(self):
         '''Top 50 song recommendations containing a distribution of Happy, Sad, Relaxed and Angry songs'''
-        # songs = self.loadSongs()
-        # self.popularSongs = [i for i in range(50)]
         df = pd.read_csv('alldata_normalized.csv')
         filtered_df_happy = df[df['mood'] == 0]
         sorted_df_happy = filtered_df_happy.sort_values(by='spot_happy', ascending=False).head(12)
@@ -129,6 +129,8 @@ class webApplication:
     def addToCurrentSession(self, song_id):
         '''When user selects a new song to play, it needs to be added to the current session'''
         self.currentSessionSongs.append(song_id)
+        self.currentlyPlaying = self.currentSessionSongs[len(self.currentSessionSongs)-1]
+        self.currentlyPlayedSong = [song for song in self.allSongs if int(song.song_id) == int(self.currentlyPlaying)][0]
 
         # if len(self.currentSessionSongs) > self.sessionThreshold:
         #     self.generateRecommendations()
@@ -143,7 +145,9 @@ class webApplication:
         '''Whenever there is an update to the current session, recommendations need to be refreshed
         This function is called in all such cases'''
 
-        sessionOutput = SessionOutput(use_lyrics= True, session_length=3, session_songIDs= self.currentSessionSongs)
+        print("calling recommendations function")
+        print("Now the lyrics toggle is ", self.lyricsToggle)
+        sessionOutput = SessionOutput(use_lyrics= self.lyricsToggle, session_length=3, session_songIDs= self.currentSessionSongs)
         self.recommendedSongs = sessionOutput.recommend_songs()
 
         return [song for song in self.allSongs if int(song.song_id) in self.recommendedSongs]
