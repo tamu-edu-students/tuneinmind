@@ -27,6 +27,8 @@ class webApplication:
         self.popularSongs = []
         self.allSongs = []
         self.recommendedSongs = []
+        self.currentlyPlaying = None
+        self.currentlyPlayedSong = []
         self.sessionThreshold = 5
         self.lyricsToggle = True
         self.loadSongs()
@@ -127,6 +129,8 @@ class webApplication:
     def addToCurrentSession(self, song_id):
         '''When user selects a new song to play, it needs to be added to the current session'''
         self.currentSessionSongs.append(song_id)
+        self.currentlyPlaying = self.currentSessionSongs[len(self.currentSessionSongs)-1]
+        self.currentlyPlayedSong = [song for song in self.allSongs if int(song.song_id) == int(self.currentlyPlaying)][0]
 
         # if len(self.currentSessionSongs) > self.sessionThreshold:
         #     self.generateRecommendations()

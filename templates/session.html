@@ -168,6 +168,29 @@
       margin-top: 20px;
     }
 
+    .music-player {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      text-align: center;
+      font-size: 30px;
+      margin: 10px;
+      border: 1px solid #000; /* border style */
+      padding: 10px; /* spacing between border and content */
+       /* spacing between box and other elements */
+      box-shadow: 2px 2px 5px #888; /* shadow effect */
+    }
+
+    .image-button {
+      width: 50px;
+      height: 40px;
+      background-image: url("../static/assets/img/play.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
 
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>  
@@ -220,6 +243,13 @@
         </table>
       </div>
     </div>
+
+    <div class ='music-player'>
+      <span id="current-song">Song Title</span>
+      <span> ----By----</span>
+      <span id="artist-name">Song Artist</span>
+    <button class = "image-button"></button>
+  </div>
     <div class="scrollable-div-right">
       <h2>Popular Songs</h2>
       <div class = "popular-songs-div">
@@ -251,6 +281,8 @@
       
     </div>
   </div>
+
+  
   
 </body>
 </html>
