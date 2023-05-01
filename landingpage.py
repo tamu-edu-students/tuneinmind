@@ -28,16 +28,24 @@ def get_recommended_songs():
     # Get the current session songs
     print(webApp.currentSessionSongs)
     current_session_songs = [int(x) for x in webApp.currentSessionSongs]
-    print("------Current Session Songs------")
-    print(current_session_songs)
+    # print("------Current Session Songs------")
+    # print(current_session_songs)
     webApp.currentSessionSongs = current_session_songs
     # Generate the recommended songs based on the current session songs
     recommended_songs = webApp.generateRecommendations()
-    print("------Recommended Songs------")
-    print(recommended_songs)
+    # print("------Recommended Songs------")
+    # print(recommended_songs)
     # Convert the recommended songs to a JSON response
     response = [{'title': song.title, 'artist': song.artist, 'song_id': song.song_id} for song in recommended_songs]
     return jsonify(response)
+
+@app.route('/toggle', methods=['POST'])
+def toggle():
+    toggle_value = request.form['toggle']
+    print('Toggle value:', toggle_value)
+    if toggle_value == "false": webApp.lyricsToggle = False
+    elif toggle_value == "true": webApp.lyricsToggle = True
+    return jsonify({'status': 'OK'})
 
 if __name__ == '__main__':
     app.run(debug=True)

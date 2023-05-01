@@ -55,6 +55,23 @@ $(document).ready(function() {
         }
       });
     }
+
+    const toggle = $('#toggle');
+    
+    toggle.change(function() {
+        const toggleValue = toggle.prop('checked');
+        $.ajax({
+            type: 'POST',
+            url: '/toggle',
+            data: { toggle: toggleValue },
+            success: function(response) {
+                console.log('Toggle value submitted successfully');
+            },
+            error: function(err) {
+                console.log('Error submitting toggle value:', err);
+            }
+        });
+    });
   
     // add click event listener to songs table rows
     $('.songs-table tr').click(function() {

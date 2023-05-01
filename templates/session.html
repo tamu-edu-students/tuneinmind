@@ -7,7 +7,20 @@
     /* CSS styles for the layout */
     .row {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      margin-top: 80px;
+      margin-bottom: 70px;
+      margin-right: 30px;
+      margin-left: 30px;
+      height: 600px;
+      width: 1600px;
+    }
+
+  
+    body {
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
     }
 
     .col {
@@ -22,6 +35,51 @@
     .right {
       width: 30%;
     }
+
+    .toggle-wrapper {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 34px;
+    }
+
+    .toggle-wrapper input[type="checkbox"] {
+      display: none;
+    }
+
+    .toggle-wrapper label {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: grey;
+      border-radius: 34px;
+      transition: background-color 0.3s ease;
+    }
+
+    .toggle-wrapper label:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 28px;
+      height: 28px;
+      background-color: white;
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle-wrapper input:checked + label {
+      background-color: #42A5F5;
+    }
+
+    .toggle-wrapper input:checked + label:before {
+      transform: translateX(46px);
+    }
+
 
     .recommended {
       position: fixed;
@@ -46,36 +104,34 @@
       cursor: pointer;
     }
 
+    .scrollable-div-right {
+      padding-left: 20px;
+      width: 45%;
+      overflow-y: scroll;
+    }
+
+    .popular-songs-div {
+      max-height: 550px;
+      overflow-y: scroll;
+    }
+
+    .left-side-tables {
+      display: flex;
+      flex-direction: column;
+      width: 45%;
+    }
+
     .fixed-div-top-left {
-        position: fixed;
-        left: 0;
-        top: 0;
-        height: 50%;
-        width: 40%;
+        height: 45%;
         overflow-y: scroll;
-        margin-left: 10px;
     }
 
     .fixed-div-bottom-left {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        height: 50%;
-        width: 40%;
+        height: 45%;
         overflow-y: scroll;
-        margin-left: 10px;
     }
 
-    .scrollable-div-right {
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        width: 50%;
-        overflow-y: scroll;
-        margin-right: 10px;
-    }
-
+    
     .current-session-table {
       border-collapse: collapse;
       width: 100%;
@@ -124,9 +180,12 @@
   <script type = "text/javascript" src="../static/Logic.js"></script>
 </head>
 <body>
+  
+
   <div class="row">
-    <div class="fixed-div-top-left">
-        <h2>Current Session</h2>
+    <div class = "left-side-tables">
+      <h2>Current Session</h2>
+      <div class="fixed-div-top-left">
         <table class="current-session-table">
           <thead>
             <tr>
@@ -139,53 +198,59 @@
           </tbody>
         </table>
       </div>
+      <h2>Recommended Songs</h2>
+      <div class="fixed-div-bottom-left">
+        <table class = "recommended-songs-table">
+            <thead>
+                <tr> 
+                <th>Title</th>
+                <th>Artist</th>
+                <th style="display:none">Song_id</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for song in recommended_songs %}
+                <tr>
+                <td>{{ song.title }}</td>
+                <td>{{ song.artist }}</td>
+                <td style="display:none">{{ song.song_id }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      </div>
+    </div>
     <div class="scrollable-div-right">
       <h2>Popular Songs</h2>
+      <div class = "popular-songs-div">
+        <table class = "songs-table">
+          <thead>
+            <tr> 
+              <th>Title</th>
+              <th>Artist</th>
+              <th style="display:none">Song_id</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for song in songs %}
+            <tr>
+              <td>{{ song.title }}</td>
+              <td>{{ song.artist }}</td>
+              <td style="display:none">{{ song.song_id }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
       <!-- <ul>
         {% for song in songs %}
         <li><a>{{ song.f_name }} - {{ song.a_name }}</a></li>
         {% endfor %}
       </ul> -->
-      <table class = "songs-table">
-        <thead>
-          <tr> 
-            <th>Title</th>
-            <th>Artist</th>
-            <th style="display:none">Song_id</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for song in songs %}
-          <tr>
-            <td>{{ song.title }}</td>
-            <td>{{ song.artist }}</td>
-            <td style="display:none">{{ song.song_id }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      
     </div>
   </div>
-  <div class="fixed-div-bottom-left">
-    <h2>Recommended Songs</h2>
-    <table class = "recommended-songs-table">
-        <thead>
-            <tr> 
-            <th>Title</th>
-            <th>Artist</th>
-            <th style="display:none">Song_id</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for song in recommended_songs %}
-            <tr>
-            <td>{{ song.title }}</td>
-            <td>{{ song.artist }}</td>
-            <td style="display:none">{{ song.song_id }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-  </div>
+  
 </body>
 </html>
