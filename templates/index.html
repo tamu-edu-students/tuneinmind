@@ -28,7 +28,7 @@
               <ul class="navbar-nav ms-auto my-2 my-lg-0">
                   <li class="nav-item"><a class="nav-link" href="#introduction">Introduction</a></li>
                   <li class="nav-item"><a class="nav-link" href="#services">Proposed Solution</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#portfolio">Performance & Evaluation</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#evaluation">Performance & Evaluation</a></li>
                   <li class="nav-item"><a class="nav-link" href="#contact">Conclusion</a></li>
               </ul>
           </div>
@@ -110,9 +110,9 @@
         </div>
     </div>
 </section>
-<!-- Portfolio-->
-<div id="portfolio">
-    <div class="container-fluid p-0">
+<!-- Evaluation-->
+<div id="evaluation">
+    <!-- <div class="container-fluid p-0">
         <div class="row g-0">
             <div class="col-lg-4 col-sm-6">
                 <a class="portfolio-box" href="../static/assets/img/portfolio/fullsize/1.jpg" title="Project Name">
@@ -169,15 +169,42 @@
                 </a>
             </div>
         </div>
-    </div>
-</div>
+    </div> -->
 <!-- Call to action-->
 <section class="page-section bg-dark text-white">
     <div class="container px-4 px-lg-5 text-center">
-        <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
-        <a class="btn btn-light btn-xl" href="https://startbootstrap.com/theme/creative/">Download Now!</a>
+        <h2 class="mb-4">Performance and Evaluation</h2>
+        <p>In recommender systems, evaluation is the process of assessing the performance and quality of the recommendations produced by the system. It involves measuring how well the recommender system predicts user preferences or behavior, and how effective the recommended items are in satisfying the user's needs.</p>
+        <p class="mb-5">In our case we have evaluated recommendations in two cases for our performance evaluation. First case is toggle on (This is feature developed by our team), In this case lyrics data is also pre-processed and analyzed along with Spotify acoustic data for generating recommendations. Second case is toggle off, In this case lyrics data is not considered, only Spotify acoustic data is considered for generating mood based recommendations.</p>
+        <!-- <a class="btn btn-light btn-xl" href="https://startbootstrap.com/theme/creative/">Download Now!</a> -->
     </div>
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div style = "width: 45%; margin-left: 50px;" class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="../static/assets/img/evaluate1.png" title="Project Name">
+                    <img class="img-fluid" src="../static/assets/img/evaluate1.png" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <!-- <div class="project-category text-white-50">Category</div> -->
+                        <div style = "text-align: center" class="project-name">Results with lyrics data</div>
+                    </div>
+                </a>
+            </div>
+            <div style = "width: 45%; margin-left: 40px;" class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="../static/assets/img/evaluate2.png" title="Project Name">
+                    <img class="img-fluid" src="../static/assets/img/evaluate2.png" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <!-- <div class="project-category text-white-50">Category</div> -->
+                        <div style = "text-align: center" class="project-name">Results without lyrics data</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+     </div>
+     <div class="container px-4 px-lg-5 mt-5 text-center">
+     <p>Comparing results in above two cases, we can see that performance is significantly improved with introduction of lyrics based moods. With usage of lyrics data , the recommendations are better generated. For happy and relaxed we can see that happy mood songs are recommended. Where as in the older case(without lyrics data) recommendations are slightly off the mark.</p>
+    </div>  
 </section>
+</div>
 <!-- Contact-->
 <section class="page-section" id="contact">
     <div class="container px-4 px-lg-5">
