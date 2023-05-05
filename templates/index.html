@@ -26,7 +26,7 @@
           <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                  <li class="nav-item"><a class="nav-link" href="#about">Introduction</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#introduction">Introduction</a></li>
                   <li class="nav-item"><a class="nav-link" href="#services">Proposed Solution</a></li>
                   <li class="nav-item"><a class="nav-link" href="#portfolio">Performance & Evaluation</a></li>
                   <li class="nav-item"><a class="nav-link" href="#contact">Conclusion</a></li>
@@ -52,14 +52,23 @@
       </div>
   </header>
   <!-- About-->
-  <section class="page-section bg-primary" id="about">
+  <section class="page-section bg-primary" id="introduction">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h2 class="text-white mt-0">We've got what you need!</h2>
+            <div class="col-lg-12">
+                <h1 class="text-white mt-0 text-center">Introduction / Problem Background / Motivation</h2>
                 <hr class="divider divider-light" />
-                <p class="text-white-75 mb-4">Start Bootstrap has everything you need to get your new website up and running in no time! Choose one of our open source, free to download, and easy to use themes! No strings attached!</p>
-                <a class="btn btn-light btn-xl" href="#services">Get Started!</a>
+                <p class="text-white-75 mb-4 fs-4">Present recommender systems do not take into account the current session based mood of the user. Recommendations are given based on user’s complete listening history</p>
+                <ul class="text-white-75 mb-4 fs-5">
+                    <li>TuneInMind solves this by taking into consideration the user's Session-based information.</li>
+                    <li>We leverage the lyrics aggregate data as well as the spotify accoustic data to derive the current session mood of a user.</li>
+                    <li>Machine Learning models like Random Forest Classifiers are used to predict the probabilities of each mood.</li>
+                    <li>We recommend songs based on the aggregate mood vector of the session's songs. Moods : Happy, Sad, Relaxed, Angry</li>
+                    <li>This will ensure that user gets appropriate song recommendations pertaining to his/hers current mood.</li>
+                </ul>
+            </div>
+            <div class="col-lg-9 text-center">
+                <a class="btn btn-light btn-xl" href="#services">Proposed Solution</a>
             </div>
         </div>
     </div>
