@@ -76,38 +76,62 @@
 <!-- Services-->
 <section class="page-section" id="services">
     <div class="container px-4 px-lg-5">
-        <h2 class="text-center mt-0">At Your Service</h2>
+        <h2 class="text-center mt-0">Proposed Solution</h2>
         <hr class="divider" />
         <div class="row gx-4 gx-lg-5">
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="mt-5">
-                    <div class="mb-2"><i class="bi-gem fs-1 text-primary"></i></div>
-                    <h3 class="h4 mb-2">Sturdy Themes</h3>
-                    <p class="text-muted mb-0">Our themes are updated regularly to keep them bug free!</p>
+                    <div class="mb-2"><i class="bi-clipboard-data fs-1 text-primary"></i></div>
+                    <h3 class="h4 mb-2">Dataset Creation</h3>
+                    <p class="text-muted mb-0">Songs included in the dataset must be available on both Genius and Spotify. We collected the data using two methods: querying the Spotify API for song features of a given track in the Genius dataset, and searching for song lyrics on the Genius API for Spotify song samples.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="mt-5">
-                    <div class="mb-2"><i class="bi-laptop fs-1 text-primary"></i></div>
-                    <h3 class="h4 mb-2">Up to Date</h3>
-                    <p class="text-muted mb-0">All dependencies are kept current to keep things fresh.</p>
+                    <div class="mb-2"><i class="bi-music-note-list fs-1 text-primary"></i></div>
+                    <h3 class="h4 mb-2">Predict Moods from lyrics</h3>
+                    <p class="text-muted mb-0">A random forest classification model is used to process song lyrics and predict the probability distribution of four mood attributes: Happy, Sad, Relax, and Angry.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="mt-5">
-                    <div class="mb-2"><i class="bi-globe fs-1 text-primary"></i></div>
-                    <h3 class="h4 mb-2">Ready to Publish</h3>
-                    <p class="text-muted mb-0">You can use this design as is, or you can make changes!</p>
+                    <div class="mb-2"><i class="bi-music-player fs-1 text-primary"></i></div>
+                    <h3 class="h4 mb-2">Predict Moods from Spotify features</h3>
+                    <p class="text-muted mb-0">Six track features (Danceability, Loudness, Valence, Acousticness, Tempo, and Energy) are obtained using the Spotify API's "Get Track's Audio Features" and pre-processed (normalized and scaled) to be used as inputs to the classification model. The model then predicts the mood distribution for four moods.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="mt-5">
-                    <div class="mb-2"><i class="bi-heart fs-1 text-primary"></i></div>
-                    <h3 class="h4 mb-2">Made with Love</h3>
-                    <p class="text-muted mb-0">Is it really open source if it's not made with love?</p>
+                    <div class="mb-2"><i class="bi-collection-play fs-1 text-primary"></i></div>
+                    <h3 class="h4 mb-2">Item-Item Collaborative filtering</h3>
+                    <p class="text-muted mb-0">During the current session, the "session aggregate mood vector" is created by combining the individual mood distribution vectors of the songs played. This vector is then used to apply Item-Item Collaborative Filtering, which recommends five songs that are most similar to the ones played during the session. The Current Mood label is obtained by aggregating mood attributes derived from both Acoustic and Lyrics data.</p>
                 </div>
             </div>
         </div>
+        <br>
+        
+    <div class="container-fluid p-0">
+      <div class="row g-0">
+          <div style = "width: 45%; margin-left: 50px;" class="col-lg-4 col-sm-6">
+              <a class="portfolio-box" href="../static/assets/img/TuneInMind_1.png" title="Project Name">
+                  <img class="img-fluid" src="../static/assets/img/TuneInMind_1.png" alt="..." />
+                  <div class="portfolio-box-caption">
+                      <!-- <div class="project-category text-white-50">Category</div> -->
+                      <div style = "text-align: center" class="project-name">Data Preprocessing</div>
+                  </div>
+              </a>
+          </div>
+          <div style = "width: 45%; margin-left: 40px;" class="col-lg-4 col-sm-6">
+              <a class="portfolio-box" href="../static/assets/img/TuneInMind_2.png" title="Project Name">
+                  <img class="img-fluid" src="../static/assets/img/TuneInMind_2.png" alt="..." />
+                  <div class="portfolio-box-caption">
+                      <!-- <div class="project-category text-white-50">Category</div> -->
+                      <div style = "text-align: center" class="project-name">Session bsed Recommendations</div>
+                  </div>
+              </a>
+          </div>
+      </div>
+   </div>
     </div>
 </section>
 <!-- Evaluation-->
